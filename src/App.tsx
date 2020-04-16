@@ -1,24 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div id="left" className="container">
+        <section>
+          <h1>
+            How many breaths left before you <em>die?</em>
+          </h1>
+        </section>
+        <section>
+          <p>
+            Enter your details into our friendly calculator and grasp the
+            reality of your impending demise.
+          </p>
+        </section>
+        <form>
+          <div className="formContainer">
+            <p>Your age:</p>
+            <input name="age"></input>
+          </div>
+          <div className="formContainer">
+            <p>Your sex:</p>
+            <div className="selectors">
+              <div className="selector">
+                <span>Male</span>
+              </div>
+              <div className="selector">
+                <span>Female</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div id="right" className="container">
+        <section>
+          <span>You have only:</span>
+        </section>
+        <section>
+          <h1>500,000,000</h1>
+        </section>
+        <section>
+          <p>Breaths left in your futile existence.</p>
+          <p>Use them wisely.</p>
+        </section>
+      </div>
     </div>
   );
 }

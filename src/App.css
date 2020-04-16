@@ -1,38 +1,172 @@
-.App {
-  text-align: center;
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App {
+  flex: 1;
   display: flex;
+  height: 100vh;
+}
+
+section {
+  margin: 1rem 0px;
+}
+
+h1 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 4.5rem;
+  font-weight: 500;
+  line-height: 4rem;
+}
+
+#left h1 em {
+  color: #ff3c09;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 1.5rem;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  flex: 1;
   flex-direction: column;
+  justify-content: center;
+  padding: 0 100px;
+}
+
+#left {
+  background-color: #0a2463;
+  color: #fff;
+}
+
+#right {
+  background-color: #f0f4ff;
+  color: #0a2463;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+}
+
+form p {
+  font-weight: bold;
+}
+
+input {
+  border-radius: 8px;
+  padding: 0 4px;
+  width: 50%;
+  font-weight: bold;
+}
+
+.selector {
+  border-radius: 8px;
+  color: #fff;
+  background-color: #0a2463;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-weight: bold;
+  border-width: 2px;
+  border-color: #fff;
+  border-style: solid;
+  flex: 1;
+  margin: 0 4px;
 }
 
-.App-link {
-  color: #61dafb;
+.selector.selected {
+  background-color: #fff;
+  color: #0a2463;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.selectors {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.formContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
