@@ -39,7 +39,7 @@ function BreathsLeft({ breaths }: { breaths: number | null }) {
               <h1>{breaths.toLocaleString()}</h1>
             </section>
             <section>
-              <p>Breaths left in your futile existence.</p>
+              <p>breaths left in your futile existence.</p>
               <p>Use them wisely.</p>
             </section>
           </div>
