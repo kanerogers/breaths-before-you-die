@@ -107,6 +107,7 @@ body {
 .container {
   display: flex;
   height: 100%;
+  width: 50%;
   flex: 1;
   flex-direction: column;
   justify-content: center;
@@ -139,6 +140,11 @@ input {
   font-weight: bold;
 }
 
+.selector.selected {
+  background-color: #fff;
+  color: #0a2463;
+}
+
 .selector {
   border-radius: 8px;
   color: #fff;
@@ -154,11 +160,6 @@ input {
   margin: 0 4px;
 }
 
-.selector.selected {
-  background-color: #fff;
-  color: #0a2463;
-}
-
 .selectors {
   display: flex;
   flex-direction: row;
@@ -169,4 +170,17 @@ input {
   display: flex;
   flex: 1;
   flex-direction: column;
+}
+
+.breathsContainer {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+}
+
+.breathsInnerContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
