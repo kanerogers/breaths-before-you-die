@@ -132,6 +132,7 @@ body {
   display: flex;
   flex: 1;
   flex-direction: column;
+  justify-content: center;
   padding: 16px;
   /* For fuck's sake, CSS */
   padding-right: 24px;
@@ -220,6 +221,7 @@ input {
   display: flex;
   flex: 1;
   flex-direction: column;
+  margin-bottom: 16px;
 }
 
 .breathsContainer {
@@ -254,6 +256,16 @@ input {
 }
 
 @media (min-width: 1000px) {
+  .breathsInnerContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .breathsContainer p {
+    text-align: left;
+  }
 }
 
 #sadWords {
