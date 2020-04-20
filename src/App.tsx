@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 import Fade from "react-reveal/Fade";
 import animationData from "./lungs.json";
 import { useLottie, Lottie } from "react-lottie-hook";
 
 type Sex = "male" | "female";
+const scrollToRef = (ref: React.MutableRefObject<any>) =>
+  window.scrollTo(0, ref.current.offsetTop);
 
 function BreathsLeft({ breaths }: { breaths: number | null }) {
   const [lottieRef, { isPaused, isStopped }, controls] = useLottie({
@@ -35,16 +37,14 @@ function BreathsLeft({ breaths }: { breaths: number | null }) {
             <section>
               <span>You have only:</span>
             </section>
+            <h1>{breaths.toLocaleString()}</h1>
             <section>
-              <h1>{breaths.toLocaleString()}</h1>
-            </section>
-            <section>
-              <p>breaths left in your futile existence.</p>
+              <p id="sadWords">breaths left in your futile existence.</p>
               <p>Use them wisely.</p>
             </section>
           </div>
         </Fade>
-        <Lottie lottieRef={lottieRef} />
+        <Lottie className="lottieContainer" lottieRef={lottieRef} />
       </div>
     );
   }
@@ -76,6 +76,9 @@ function App() {
   const femaleSelected = sex === "female";
   const breathsLeft = calculateBreaths(sex as Sex, age);
 
+  const myRef = useRef(null);
+  const executeScroll = () => scrollToRef(myRef);
+
   return (
     <div className="App">
       <div id="left" className="container">
@@ -96,7 +99,9 @@ function App() {
             <input
               name="age"
               type="number"
-              onChange={(e) => setAge(parseInt(e.target.value))}
+              onChange={(e) => {
+                setAge(parseInt(e.target.value));
+              }}
             ></input>
           </div>
           <div className="formContainer">
@@ -104,13 +109,19 @@ function App() {
             <div className="selectors">
               <div
                 className={`selector ${maleSelected ? "selected" : ""}`}
-                onClick={() => setSex("male")}
+                onClick={() => {
+                  setSex("male");
+                  executeScroll();
+                }}
               >
                 <span>Male</span>
               </div>
               <div
                 className={`selector ${femaleSelected ? "selected" : ""}`}
-                onClick={() => setSex("female")}
+                onClick={() => {
+                  setSex("female");
+                  executeScroll();
+                }}
               >
                 <span>Female</span>
               </div>
@@ -118,7 +129,7 @@ function App() {
           </div>
         </form>
       </div>
-      <div id="right" className="container">
+      <div id="right" className="container" ref={myRef}>
         <BreathsLeft breaths={breathsLeft} key={breathsLeft || "empty"} />
       </div>
     </div>

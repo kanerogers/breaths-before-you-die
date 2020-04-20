@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -80,18 +84,38 @@ select {
 .App {
   flex: 1;
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+@media (min-width: 1000px) {
+  .App {
+    flex-direction: row;
+  }
 }
 
 section {
   margin: 1rem 0px;
 }
 
+@media (min-width: 1000px) {
+  section {
+    margin: 1rem 0px;
+  }
+}
+
 h1 {
   font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 4.5rem;
+  font-size: 3rem;
   font-weight: 500;
-  line-height: 4rem;
+  line-height: 3rem;
+}
+
+@media (min-width: 1000px) {
+  h1 {
+    font-size: 4.5rem;
+    line-height: 4rem;
+  }
 }
 
 #left h1 em {
@@ -106,12 +130,25 @@ body {
 
 .container {
   display: flex;
-  height: 100%;
-  width: 50%;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
-  padding: 0 100px;
+  padding: 16px;
+  /* For fuck's sake, CSS */
+  padding-right: 24px;
+  min-height: 100vh;
+}
+
+@media (min-width: 1000px) {
+  .container {
+    display: flex;
+    height: 100%;
+    width: 50%;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 0;
+    padding: 0 100px;
+  }
 }
 
 #left {
@@ -126,18 +163,31 @@ body {
 
 form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 form p {
   font-weight: bold;
 }
 
+@media (min-width: 1000px) {
+  form {
+    margin: 0;
+    flex-direction: row;
+  }
+}
+
 input {
   border-radius: 8px;
   padding: 0 4px;
-  width: 50%;
   font-weight: bold;
+  margin-right: 4px;
+}
+
+@media (min-width: 1000px) {
+  input {
+    width: 50%;
+  }
 }
 
 .selector.selected {
@@ -174,13 +224,38 @@ input {
 
 .breathsContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex: 1;
   align-items: center;
+  justify-content: space-between;
+}
+
+.lottieContainer {
+  display: flex;
+  flex: 1;
+}
+
+@media (min-width: 1000px) {
+  .breathsContainer {
+    flex-direction: row;
+  }
 }
 
 .breathsInnerContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex: 1;
+}
+
+.breathsContainer p {
+  text-align: center;
+}
+
+@media (min-width: 1000px) {
+}
+
+#sadWords {
+  margin-bottom: 1rem;
 }
