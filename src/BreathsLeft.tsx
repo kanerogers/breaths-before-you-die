@@ -8,7 +8,6 @@ export default function BreathsLeft({ breaths }: { breaths: number | null }) {
     loop: true,
     renderer: "svg",
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
       progressiveLoad: false,
     },
     animationData,
