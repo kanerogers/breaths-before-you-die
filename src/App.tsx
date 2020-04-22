@@ -1,83 +1,37 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import BreathsLeft from "./BreathsLeft";
+import useBreaths from "./breathsState";
 import "./App.css";
-import Fade from "react-reveal/Fade";
-import animationData from "./lungs.json";
-import { useLottie, Lottie } from "react-lottie-hook";
 
 type Sex = "male" | "female";
 const scrollToRef = (ref: React.MutableRefObject<any>) =>
   window.scrollTo(0, ref.current.offsetTop);
 
-function BreathsLeft({ breaths }: { breaths: number | null }) {
-  const [lottieRef, { isPaused, isStopped }, controls] = useLottie({
-    segments: [0, 105],
-    renderer: "svg",
-    rendererSettings: {
-      // preserveAspectRatio: "xMidYMid slice",
-      progressiveLoad: false,
-    },
-    animationData,
-  });
-
-  if (!breaths) return null;
-
-  if (breaths > 600000000) {
-    return (
-      <Fade key={breaths}>
-        <h1>Seriously?</h1>
-      </Fade>
-    );
-  }
-
-  if (breaths > 0) {
-    return (
-      <div className="breathsContainer">
-        <Fade key={breaths}>
-          <div className="breathsInnerContainer">
-            <section>
-              <span>You have only:</span>
-            </section>
-            <h1>{breaths.toLocaleString()}</h1>
-            <section>
-              <p id="sadWords">breaths left in your futile existence.</p>
-              <p>Use them wisely.</p>
-            </section>
-          </div>
-        </Fade>
-        <Lottie className="lottieContainer" lottieRef={lottieRef} />
-      </div>
-    );
-  }
-
-  return (
-    <Fade key={breaths}>
-      <h1>Smart arse.</h1>
-    </Fade>
-  );
-}
-
-function calculateBreaths(sex: "" | Sex, age?: number): number | null {
-  if (sex === "" || age === undefined) return null;
-  const BREATHS_PER_YEAR = 8409600;
-  const LIFE_EXPECTANCY = {
-    male: 80.5,
-    female: 84.6,
-  };
-  const yearsLeft = LIFE_EXPECTANCY[sex] - age;
-  const breathsLeft = yearsLeft * BREATHS_PER_YEAR;
-  return breathsLeft;
-}
-
-function App() {
+export default function App() {
   const [sex, setSex] = useState("");
   const [age, setAge] = useState<number | undefined>(undefined);
+  const { breaths, setBreaths, decrement } = useBreaths();
 
   const maleSelected = sex === "male";
   const femaleSelected = sex === "female";
-  const breathsLeft = calculateBreaths(sex as Sex, age);
 
   const myRef = useRef(null);
   const executeScroll = () => scrollToRef(myRef);
+
+  useEffect(() => {
+    if (breaths) {
+      decrement();
+      executeScroll();
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("Hello?");
+      decrement();
+    }, 3000);
+    return () => clearTimeout(timer);
+  });
 
   return (
     <div className="App">
@@ -111,6 +65,8 @@ function App() {
                 className={`selector ${maleSelected ? "selected" : ""}`}
                 onClick={() => {
                   setSex("male");
+                  const breathsLeft = calculateBreaths("male", age);
+                  setBreaths(breathsLeft);
                   executeScroll();
                 }}
               >
@@ -120,6 +76,8 @@ function App() {
                 className={`selector ${femaleSelected ? "selected" : ""}`}
                 onClick={() => {
                   setSex("female");
+                  const breathsLeft = calculateBreaths("female", age);
+                  setBreaths(breathsLeft);
                   executeScroll();
                 }}
               >
@@ -130,10 +88,20 @@ function App() {
         </form>
       </div>
       <div id="right" className="container" ref={myRef}>
-        <BreathsLeft breaths={breathsLeft} key={breathsLeft || "empty"} />
+        <BreathsLeft breaths={breaths} key={sex} />
       </div>
     </div>
   );
 }
 
-export default App;
+function calculateBreaths(sex: "" | Sex, age?: number): number | null {
+  if (sex === "" || age === undefined) return null;
+  const BREATHS_PER_YEAR = 8409600;
+  const LIFE_EXPECTANCY = {
+    male: 80.5,
+    female: 84.6,
+  };
+  const yearsLeft = LIFE_EXPECTANCY[sex] - age;
+  const breathsLeft = yearsLeft * BREATHS_PER_YEAR;
+  return breathsLeft;
+}
