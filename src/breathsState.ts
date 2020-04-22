@@ -17,6 +17,8 @@ const useBreaths = () => {
   return {
     breaths: breathState.breaths,
     setBreaths: (breaths: number | null) => {
+      if (breaths)
+        window.document.title = `You have ${breaths.toLocaleString()} breaths left.`;
       setBreathState({
         lastTime: new Date().getTime(),
         breaths,
@@ -30,10 +32,13 @@ const useBreaths = () => {
         const breathsDelta = Math.round(
           timeDeltaInSeconds * BREATHS_PER_SECOND
         );
+        const breaths = currentState.breaths - breathsDelta;
+
+        window.document.title = `You have ${breaths.toLocaleString()} breaths left.`;
 
         return {
           lastTime: currentTime,
-          breaths: currentState.breaths - breathsDelta,
+          breaths,
         };
       }),
   };

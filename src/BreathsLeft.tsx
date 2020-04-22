@@ -4,7 +4,7 @@ import animationData from "./lungs.json";
 import { useLottie, Lottie } from "react-lottie-hook";
 
 export default function BreathsLeft({ breaths }: { breaths: number | null }) {
-  const [lottieRef, { isPaused, isStopped }, controls] = useLottie({
+  const [lottieRef] = useLottie({
     loop: true,
     renderer: "svg",
     rendererSettings: {
